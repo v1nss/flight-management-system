@@ -5,6 +5,7 @@ import MongoStore from "connect-mongo";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
 import connectDB from "./config/db.js"
+import flightRoutes from "./routes/flightRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -42,6 +43,9 @@ app.use(
 
 // Routes
 app.use("/api/users", userRoutes);
+
+
+app.use("/api/flights", flightRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
