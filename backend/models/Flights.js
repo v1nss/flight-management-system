@@ -1,29 +1,29 @@
 import mongoose from "mongoose";
 
-const flightsSchema = new mongoose.Schema({
+const flightSchema = new mongoose.Schema({
     departureCity: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     arrivalCity: {
         type: String,
-        required: true,
+        required: false,
     },
     departureTime: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     departureTime: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     arrivalTime: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     flightNumber: {
         type: Number,
@@ -32,6 +32,6 @@ const flightsSchema = new mongoose.Schema({
     }
 });
 
-const Flight = mongoose.model("Flight", flightsSchema);
+const Flight = mongoose.model("Flight", flightSchema);
 
 export default Flight;

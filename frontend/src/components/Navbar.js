@@ -30,10 +30,16 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to="/about"
+            to="/FlightPage"
             className="hover:underline hover:text-blue-300 transition duration-300"
           >
             Flight Details
+          </Link>
+          <Link
+            to="/UpdateUser"
+            className="hover:underline hover:text-blue-300 transition duration-300"
+          >
+            Update User
           </Link>
           {/* <Link
             to="/contact"

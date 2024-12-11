@@ -1,5 +1,5 @@
-import Flight from "../models/Flights";
-import User from "../models/Users";
+import Flight from "../models/Flights.js";
+import User from "../models/Users.js";
 
 // Add a new flight for a user
 const addFlight = async (req, res) => {

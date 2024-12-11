@@ -5,7 +5,8 @@ import Navbar from "./components/Navbar"; // Adjust the path as needed
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import LandingPage from "./pages/LandingPage";
+import UpdateUser from "./pages/UpdateUser";
+import FlightPage from "./pages/FlightPage"
 
 const App = () => {
   const location = useLocation(); // Get current location
@@ -22,9 +23,11 @@ const App = () => {
           {/* <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}
-          <Route path="/LandingPage" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/UpdateUser" element={<UpdateUser />} />
+          <Route path="/FlightPage" element={<FlightPage />} />
         </Routes>
       </div>
     </>
