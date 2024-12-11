@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 
-const LandingPage = () => {
+const UpdateUser = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
     age: "",
@@ -17,7 +17,7 @@ const LandingPage = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axiosInstance.get("/me"); // Get logged-in user's info
+        const response = await axiosInstance.get("/users/me"); // Get logged-in user's info
         setUserInfo(response.data || {}); // Populate form with existing data
       } catch (error) {
         console.error("Error fetching user info:", error);
@@ -41,7 +41,7 @@ const LandingPage = () => {
     setMessage(null);
 
     try {
-      const response = await axiosInstance.patch("/me", userInfo); // Update logged-in user's info
+      const response = await axiosInstance.patch("/users/me", userInfo); // Update logged-in user's info
       setMessage("Information updated successfully!");
     } catch (error) {
       console.error("Error updating info:", error);
@@ -135,4 +135,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default UpdateUser;

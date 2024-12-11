@@ -10,6 +10,8 @@ flightRoutes.post("/", authenticate, flightController.addFlight);
 // Get all flights for the logged-in user
 flightRoutes.get("/", authenticate, flightController.getUserFlights);
 
+flightRoutes.patch("/:flightId", authenticate, flightController.updateFlight);
+
 // Delete a flight by ID
 flightRoutes.delete("/:flightId", authenticate, flightController.deleteFlight);
 

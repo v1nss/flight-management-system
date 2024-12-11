@@ -15,9 +15,9 @@ const Login = () => {
     setError(null); // Clear previous error
 
     try {
-      const response = await axiosInstance.post("/login", { username, password });
+      const response = await axiosInstance.post("/users/login", { username, password });
       if (response.status === 200) {
-        navigate("/LandingPage");
+        navigate("/");
       }
     } catch (err) {
       // Handle error responses

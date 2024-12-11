@@ -39,19 +39,22 @@ const addFlight = async (req, res) => {
 // Get all flights for a user
 const getUserFlights = async (req, res) => {
   try {
-    const userId = req.session.user?.id; // Get logged-in user's ID from session
+    const userId = req.session.user?.id; // Ensure the user is authenticated
     if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
-    // Find the user and populate their flights
-    const user = await User.findById(userId).populate("flights"); // Assuming the User model has `flights` as a reference to the Flight model
+    console.log("User ID:", userId);
+
+    const user = await User.findById(userId).populate("flights");
     if (!user) return res.status(404).json({ message: "User not found" });
 
+    console.log("Flights:", user.flights);
     res.status(200).json({ flights: user.flights });
   } catch (error) {
-    console.error("Error fetching user flights:", error);
+    console.error("Error fetching flights:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // Delete a flight by its ID
 const deleteFlight = async (req, res) => {
@@ -79,8 +82,29 @@ const deleteFlight = async (req, res) => {
   }
 };
 
+export const updateFlight = async (req, res) => {
+  try {
+    const { flightId } = req.params; // Extract flightId from route params
+    const updatedFlight = await Flight.findByIdAndUpdate(flightId, req.body, {
+      new: true, // Return the updated document
+      runValidators: true, // Validate against schema
+    });
+
+    if (!updatedFlight) {
+      return res.status(404).json({ message: "Flight not found" });
+    }
+
+    res.status(200).json({ updatedFlight });
+  } catch (error) {
+    console.error("Error updating flight:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
 export default {
     addFlight,
     getUserFlights,
-    deleteFlight
+    deleteFlight,
+    updateFlight
   };

@@ -6,7 +6,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const handleLogout = async () => {
         try {
-          await axiosInstance.post("/logout");
+          await axiosInstance.post("/users/logout");
           navigate("/login");
         } catch (error) {
           console.error("Logout failed:", error);
@@ -33,13 +33,13 @@ const Navbar = () => {
             to="/FlightPage"
             className="hover:underline hover:text-blue-300 transition duration-300"
           >
-            Flight Details
+            Add Flight
           </Link>
           <Link
             to="/UpdateUser"
             className="hover:underline hover:text-blue-300 transition duration-300"
           >
-            Update User
+            Update Info
           </Link>
           {/* <Link
             to="/contact"

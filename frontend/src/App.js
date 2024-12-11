@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar"; // Adjust the path as needed
 // import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import HomePage from "./pages/Home"
 import UpdateUser from "./pages/UpdateUser";
 import FlightPage from "./pages/FlightPage"
 
@@ -25,7 +26,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/UpdateUser" element={<UpdateUser />} />
           <Route path="/FlightPage" element={<FlightPage />} />
         </Routes>
