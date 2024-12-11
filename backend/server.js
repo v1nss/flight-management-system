@@ -4,6 +4,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import connectDB from "./config/db.js"
 import flightRoutes from "./routes/flightRoutes.js";
 
@@ -43,9 +44,8 @@ app.use(
 
 // Routes
 app.use("/api/users", userRoutes);
-
-
 app.use("/api/flights", flightRoutes);
+app.use("/api/admins", adminRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
