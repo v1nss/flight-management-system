@@ -9,13 +9,16 @@ dotenv.config();
 // function for geting all users
 const getAllUsers = async (req, res) => {
   try {
-    const users = await Users.find();
-    res.status(200).json(users);
+    const users = await Users.find()
+      .select("username email flights info") // Fetch only necessary fields
+      .populate("flights", "departureCity arrivalCity flightNumber"); // Populate flights if needed
+
+    res.status(200).json({ users }); // Wrap the response in an object
   } catch (err) {
+    console.error("Error fetching users:", err);
     res.status(400).json({ message: err.message });
   }
 };
-
 const createUser = async (req, res) => {
     
     try {

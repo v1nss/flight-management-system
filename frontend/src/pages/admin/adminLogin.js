@@ -1,35 +1,29 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios
-import axiosInstance from "../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../api/axiosInstance";
+import { Link } from "react-router-dom";
 
-const Login = () => {
-  const [username, setUsername] = useState(""); // State for username
-  const [password, setPassword] = useState(""); // State for password
-  const [error, setError] = useState(null); // State for error messages
-  const navigate = useNavigate(); // Navigation hook
+const AdminLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Clear previous error
+    setError(null);
 
     try {
-      const response = await axiosInstance.post("/users/login", { username, password });
+      const response = await axiosInstance.post("/admins/login", { email, password });
+
       if (response.status === 200) {
-        navigate("/Home");
+        navigate("/admin/dashboard"); // Redirect to admin dashboard
       }
     } catch (err) {
-      // Handle error responses
       if (err.response) {
-        // Server responded with a status other than 2xx
-        setError(err.response.data.message || "Invalid credentials.");
-      } else if (err.request) {
-        // Request was made but no response received
-        setError("Unable to connect to the server. Please try again later.");
+        setError(err.response.data.message || "Login failed");
       } else {
-        // Something else went wrong
-        setError("An unexpected error occurred. Please try again.");
+        setError("An unexpected error occurred.");
       }
     }
   };
@@ -37,8 +31,8 @@ const Login = () => {
   return (
     <div className="h-screen bg-gray-100 flex justify-center items-center flex-col font-sans">
       <div className="rounded-[10px] w-[80%] sm:w-8/12 md:w-6/12 lg:w-4/12 xl:w-3/12 2xl:w-1/6 h-fit text-center p-[24px] bg-gray-100 text-black shadow-lg border border-gray-400">
-        <h2 className="font-extrabold text-2xl text-blue-800 mb-1">LOGIN</h2>
-        <p className="text-xs mb-[30px]">Welcome to Flight Management System</p>
+        <h2 className="font-extrabold text-2xl text-blue-800 mb-1">ADMIN LOGIN</h2>
+        <p className="text-xs mb-[30px]">Welcome to the Admin Dashboard</p>
         {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
         <form
           onSubmit={handleSubmit}
@@ -46,10 +40,10 @@ const Login = () => {
         >
           <input
             className="w-full px-[20px] py-[10px] rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition duration-300"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
@@ -69,7 +63,7 @@ const Login = () => {
           <hr className="w-full"></hr>
         </form>
       </div>
-      <Link to="/register">
+      <Link to="/admin/register">
         <h3 className="mt-[10px] text-sm">
           Don't have an account?{" "}
           <span className="text-blue-600 hover:underline font-bold">
@@ -81,4 +75,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

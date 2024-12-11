@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 
 const HomePage = () => {
+  const [users, setUsers] = useState([]);
   const [flights, setFlights] = useState([]);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,25 @@ const HomePage = () => {
 
     fetchFlights();
   }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosInstance.get("/users");
+        setUsers(response.data.users || []);
+      } catch (error) {
+        console.error("Error fetching flights:", error);
+        setMessage("Failed to load flights. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+  console.log(users)
+  
+
 
   // Handle flight deletion
   const cancelFlight = async (flightId) => {
@@ -189,6 +209,7 @@ const HomePage = () => {
           ))}
         </div>
       )}
+
     </div>
   );
 };

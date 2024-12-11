@@ -24,7 +24,7 @@ const Navbar = () => {
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-6">
           <Link
-            to="/"
+            to="/Home"
             className="hover:underline hover:text-blue-300 transition duration-300"
           >
             Home
